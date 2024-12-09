@@ -1,47 +1,31 @@
 using UnityEngine;
 
-public class OneWayPlatformController : MonoBehaviour
+public class OneWayPlatform : MonoBehaviour
 {
-    private Collider2D platformCollider;
-    private Rigidbody2D rb;
+    private PlatformEffector2D platformEffector;
 
     [SerializeField]
-    private float disableDuration = 0.2f; // Время, на которое отключается коллайдер
+    private float fallThroughDelay = 0.2f; // Время задержки для падения сквозь платформу
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        // Проверяем, если это платформа с Platform Effector
-        if (collision.GetComponent<PlatformEffector2D>())
-        {
-            platformCollider = collision;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision == platformCollider)
-        {
-            platformCollider = null;
-        }
+        platformEffector = GetComponent<PlatformEffector2D>();
     }
 
     private void Update()
     {
-        if (platformCollider != null && Input.GetKey(KeyCode.DownArrow))
+        // Проверка на нажатие вниз для спрыгивания
+        if (Input.GetKey(KeyCode.S))
         {
-            StartCoroutine(DisablePlatformCollider());
+            platformEffector.rotationalOffset = 180f; // Позволяем падение сквозь платформу
+
+            // Возвращаем нормальное поведение через задержку
+            Invoke(nameof(ResetPlatform), fallThroughDelay);
         }
     }
 
-    private System.Collections.IEnumerator DisablePlatformCollider()
+    private void ResetPlatform()
     {
-        platformCollider.enabled = false;
-        yield return new WaitForSeconds(disableDuration);
-        platformCollider.enabled = true;
+        platformEffector.rotationalOffset = 0f; // Восстанавливаем возможность стоять на платформе
     }
 }

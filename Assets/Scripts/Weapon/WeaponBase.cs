@@ -23,7 +23,7 @@ public class WeaponBase : MonoBehaviour
         transform.right = direction;
 
         GameObject projectile = Instantiate(projectilePrefab, 
-                                            firePoint.position + (Vector3)direction.normalized * 2, 
+                                            firePoint.position + (Vector3)direction.normalized, 
                                             firePoint.rotation);
 
         ProjectileBase projectileScript = projectile.GetComponent<ProjectileBase>();

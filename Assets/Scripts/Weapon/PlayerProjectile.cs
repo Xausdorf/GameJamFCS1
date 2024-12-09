@@ -6,7 +6,13 @@ public class PlayerProjectile : ProjectileBase
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            // TODO: decrease enemy hp
+            Health targetHealth = collision.gameObject.GetComponent<Health>();
+            if (targetHealth != null)
+            {
+                targetHealth.TakeDamage(damage);
+            }
+
+            Destroy(gameObject);
         }
         else if (!collision.gameObject.CompareTag("Player"))
         {

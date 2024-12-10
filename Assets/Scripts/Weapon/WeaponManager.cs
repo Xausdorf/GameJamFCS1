@@ -32,5 +32,6 @@ public class WeaponManager : MonoBehaviour
     {
         weapons[curWeapon].Activate(false);
         weapons[newIndex].Activate(true);
+        curWeapon = newIndex;
     }
 }

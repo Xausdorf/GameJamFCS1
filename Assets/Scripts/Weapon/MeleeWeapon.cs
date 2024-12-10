@@ -2,25 +2,26 @@ using UnityEngine;
 
 public class MeleeWeapon : WeaponBase
 {
-    public float attackDuration = 0.4f;
+    public float attackDuration = 0.1f;
     public float attackAngle = 120f;
     public bool isAttacking = false;
     private float progress = 0f;
     private SpriteRenderer sr;
+    private PolygonCollider2D hitbox;
 
     void Start()
     {
-        fireRate = 0.4f;
-        attackDuration = 0.4f;
         isAttacking = false;
         progress = 0f;
         sr = GetComponent<SpriteRenderer>();
+        hitbox = GetComponent<PolygonCollider2D>();
         sr.enabled = false;
+        hitbox.enabled = false;
     }
 
     protected override void Update()
     {
-        if (Input.GetKey(KeyCode.Mouse0) && Time.time >= nextFireTime)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && Time.time >= nextFireTime)
         {
             Fire();
             nextFireTime = Time.time + attackDuration;
@@ -29,6 +30,9 @@ public class MeleeWeapon : WeaponBase
         if (isAttacking)
         {
             PerformAttack();
+        } else
+        {
+            FollowCursor();
         }
     }
 
@@ -38,23 +42,25 @@ public class MeleeWeapon : WeaponBase
 
         isAttacking = true;
         progress = 0f;
-
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 direction = mousePos - firePoint.position;
-
-        transform.RotateAround(firePoint.position, new Vector3(0, 0, -1), Mathf.Atan2(direction.y, direction.x));
-        transform.RotateAround(firePoint.position, new Vector3(0, 0, -1), -attackAngle / 2);
-
         sr.enabled = true;
+        hitbox.enabled = true;
 
         Invoke(nameof(StopAttack), attackDuration);
     }
 
+    private void FollowCursor()
+    {
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        Vector3 direction = (mousePosition - transform.position).normalized;
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90;
+        transform.rotation = Quaternion.Euler(0, 0, angle);
+    }
+
     private void PerformAttack()
     {
-        sr.enabled = true;
         progress += Time.deltaTime;
-        transform.RotateAround(firePoint.position, new Vector3(0, 0, -1), attackAngle / attackDuration * Time.deltaTime);
         if (progress >= attackDuration)
         {
             StopAttack();
@@ -65,13 +71,12 @@ public class MeleeWeapon : WeaponBase
     {
         isAttacking = false;
         sr.enabled = false;
-        transform.rotation = Quaternion.Euler(0, 0, 0);
-        transform.position = firePoint.position + new Vector3(0, 1);
+        hitbox.enabled = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
+        if (isAttacking && collision.CompareTag("Enemy"))
         {
             Health enemyHealth = collision.GetComponent<Health>();
             if (enemyHealth != null)

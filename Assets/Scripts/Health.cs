@@ -3,7 +3,7 @@ using UnityEngine;
 public abstract class Health : MonoBehaviour
 {
     public int maxHealth = 20;
-    private int curHealth;
+    public int curHealth;
 
     protected virtual void Start()
     {

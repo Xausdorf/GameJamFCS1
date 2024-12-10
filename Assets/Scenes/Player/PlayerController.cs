@@ -2,9 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using System.Collections;
-using UnityEngine;
-
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;  // Скорость перемещения
@@ -13,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public float dashDuration = 0.2f;  // Длительность рывка
     public float dashCooldown = 0.5f;  // Время до следующего рывка
 
+    public bool isInvincible = false;
     private bool isGrounded;
     private bool isDashing;
     private bool canDoubleJump;
@@ -93,6 +91,8 @@ public class PlayerController : MonoBehaviour
     {
         isDashing = true;
 
+        isInvincible = true;
+
         float dashDirection = (moveInput.x != 0) ? moveInput.x : (isFacingRight ? 1f : -1f);
 
         rb.velocity = new Vector2(dashDirection * dashSpeed, rb.velocity.y);
@@ -101,11 +101,13 @@ public class PlayerController : MonoBehaviour
 
         isDashing = false;
         dashTime = Time.time + dashCooldown;
+
+        isInvincible = false;
     }
 
     private void FallThroughPlatform()
     {
-        rb.velocity = new Vector2(rb.velocity.x, -10f);  // Ускорение вниз
+        rb.velocity = new Vector2(rb.velocity.x, -20f);  // Ускорение вниз
     }
 
     private void Flip()

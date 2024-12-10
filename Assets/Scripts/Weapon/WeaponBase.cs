@@ -5,7 +5,8 @@ public class WeaponBase : MonoBehaviour
     public GameObject projectilePrefab;
     public Transform firePoint;
     public float fireRate = 1f;
-    private float nextFireTime;
+    public int damage = 10;
+    protected float nextFireTime;
 
     protected virtual void Update()
     {
@@ -28,5 +29,6 @@ public class WeaponBase : MonoBehaviour
 
         ProjectileBase projectileScript = projectile.GetComponent<ProjectileBase>();
         projectileScript.direction = direction;
+        projectileScript.damage = damage;
     }
 }

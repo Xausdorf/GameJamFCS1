@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = 10f;  // Сила прыжка
     public float dashSpeed = 10f;  // Скорость рывка
     public float dashDuration = 0.2f;  // Длительность рывка
-    public float dashCooldown = 0.5f;  // Время до следующего рывка
+    public float dashCooldown = 1.5f;  // Время до следующего рывка
 
     public bool isInvincible = false;
     private bool isGrounded;
@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Спуск с платформы
-        if (Input.GetKey(KeyCode.S))
+        if (isGrounded && Input.GetKeyDown(KeyCode.S))
         {
             FallThroughPlatform();
         }
@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour
 
     private void FallThroughPlatform()
     {
-        rb.velocity = new Vector2(rb.velocity.x, -20f);  // Ускорение вниз
+        rb.velocity = new Vector2(rb.velocity.x, -5f);  // Ускорение вниз
     }
 
     private void Flip()

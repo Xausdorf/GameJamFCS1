@@ -214,7 +214,7 @@ MonoBehaviour:
   jumpForce: 10
   dashSpeed: 10
   dashDuration: 0.2
-  dashCooldown: 0.5
+  dashCooldown: 1.5
   isInvincible: 0
 --- !u!61 &7620571977175633228
 BoxCollider2D:

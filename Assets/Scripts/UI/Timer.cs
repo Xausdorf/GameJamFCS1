@@ -1,28 +1,31 @@
-using UnityEngine;
-using TMPro; // Используйте, если работаете с TextMeshPro
-
-public class TimerUI : MonoBehaviour
+namespace UI
 {
-    public TextMeshProUGUI timerText; // Привяжите текстовый объект сюда
-    public float totalTime = 0; // Таймер на 5 минут (300 секунд)
+    using UnityEngine;
+    using TMPro; // Используйте, если работаете с TextMeshPro
 
-    private void Update()
+    public class TimerUI : MonoBehaviour
     {
-        //Увеличение времени таймера
-        totalTime += Time.deltaTime;
-        UpdateTimerDisplay();
-    }
+        public TextMeshProUGUI timerText; // Привяжите текстовый объект сюда
+        public float totalTime = 0; // Таймер на 5 минут (300 секунд)
 
-    private void UpdateTimerDisplay()
-    {
-        int minutes = Mathf.FloorToInt(totalTime / 60);
-        int seconds = Mathf.FloorToInt(totalTime % 60);
-        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-    }
+        private void Update()
+        {
+            //Увеличение времени таймера
+            totalTime += Time.deltaTime;
+            UpdateTimerDisplay();
+        }
 
-    // private void TimerFinished()
-    // {
-    //     Debug.Log("Таймер завершён!");
-    //     // Здесь можно вызвать действия по завершению таймера
-    // }
+        private void UpdateTimerDisplay()
+        {
+            int minutes = Mathf.FloorToInt(totalTime / 60);
+            int seconds = Mathf.FloorToInt(totalTime % 60);
+            timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        }
+
+        // private void TimerFinished()
+        // {
+        //     Debug.Log("Таймер завершён!");
+        //     // Здесь можно вызвать действия по завершению таймера
+        // }
+    }
 }

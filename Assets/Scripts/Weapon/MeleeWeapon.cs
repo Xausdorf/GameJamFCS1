@@ -20,7 +20,7 @@ public class MeleeWeapon : WeaponBase
 
     protected override void Update()
     {
-        if (Input.GetKey(KeyCode.Mouse1) && Time.time >= nextFireTime)
+        if (Input.GetKey(KeyCode.Mouse0) && Time.time >= nextFireTime)
         {
             Fire();
             nextFireTime = Time.time + attackDuration;

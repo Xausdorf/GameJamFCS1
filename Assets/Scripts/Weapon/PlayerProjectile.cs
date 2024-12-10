@@ -2,20 +2,16 @@ using UnityEngine;
 
 public class PlayerProjectile : ProjectileBase
 {
-    protected override void OnCollisionEnter2D(Collision2D collision)
+    protected override void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collider.CompareTag("Enemy"))
         {
-            Health targetHealth = collision.gameObject.GetComponent<Health>();
+            Health targetHealth = collider.GetComponent<Health>();
             if (targetHealth != null)
             {
                 targetHealth.TakeDamage(damage);
             }
 
-            Destroy(gameObject);
-        }
-        else if (!collision.gameObject.CompareTag("Player"))
-        {
             Destroy(gameObject);
         }
     }

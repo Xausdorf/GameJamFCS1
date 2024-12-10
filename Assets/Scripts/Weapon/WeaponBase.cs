@@ -31,4 +31,9 @@ public class WeaponBase : MonoBehaviour
         projectileScript.direction = direction;
         projectileScript.damage = damage;
     }
+
+    public virtual void Activate(bool isActive)
+    {
+        gameObject.SetActive(isActive);
+    }
 }

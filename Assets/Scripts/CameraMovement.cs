@@ -7,7 +7,7 @@ public class CameraFollow2D : MonoBehaviour
 
     [Header("Camera Settings")]
     public Vector2 offset; // Смещение камеры относительно персонажа
-    public float smoothSpeed = 0.1f; // Скорость сглаживания движения
+    public float smoothSpeed = 0.0125f; // Скорость сглаживания движения
 
     private Vector3 desiredPosition; // Желаемая позиция камеры
     private Vector3 smoothedPosition; // Плавная позиция камеры

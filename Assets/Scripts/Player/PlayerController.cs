@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 5f;  // Скорость перемещения
+    public float moveSpeed = 7f;  // Скорость перемещения
     public float jumpForce = 10f;  // Сила прыжка
-    public float dashSpeed = 10f;  // Скорость рывка
-    public float dashDuration = 0.2f;  // Длительность рывка
-    public float dashCooldown = 1.5f;  // Время до следующего рывка
+    public float dashSpeed = 20f;  // Скорость рывка
+    public float dashDuration = 0.3f;  // Длительность рывка
+    public float dashCooldown = 1f;  // Время до следующего рывка
 
     public bool isInvincible = false;
     private bool isGrounded;
     private bool isDashing;
     private bool canDoubleJump;
     private bool isFacingRight = true;
-    private float dashTime;
+    private float nextDashTime = 0;
 
     private Rigidbody2D rb;
     private Animator animator;  // Для анимаций, если нужно
@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        nextDashTime = 0;
         rb = GetComponent<Rigidbody2D>();
         // animator = GetComponent<Animator>();  // если у вас есть аниматор
     }
@@ -65,7 +66,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Дешинг
-        if (Input.GetKeyDown(KeyCode.LeftShift) && !isDashing)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !isDashing && Time.time >= nextDashTime)
         {
             StartCoroutine(Dash());
         }
@@ -94,18 +95,16 @@ public class PlayerController : MonoBehaviour
     private IEnumerator Dash()
     {
         isDashing = true;
-
         isInvincible = true;
 
         float dashDirection = (moveInput.x != 0) ? moveInput.x : (isFacingRight ? 1f : -1f);
-
         rb.velocity = new Vector2(dashDirection * dashSpeed, rb.velocity.y);
+
+        nextDashTime = Time.time + dashCooldown;
 
         yield return new WaitForSeconds(dashDuration);
 
         isDashing = false;
-        dashTime = Time.time + dashCooldown;
-
         isInvincible = false;
     }
 

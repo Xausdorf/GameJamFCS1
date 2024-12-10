@@ -210,11 +210,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bda552ace479574dbf11a6de7a62673, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 7
   jumpForce: 10
-  dashSpeed: 10
-  dashDuration: 0.2
-  dashCooldown: 1.5
+  dashSpeed: 20
+  dashDuration: 0.3
+  dashCooldown: 1
   isInvincible: 0
 --- !u!61 &7620571977175633228
 BoxCollider2D:

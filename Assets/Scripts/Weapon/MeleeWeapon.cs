@@ -8,9 +8,11 @@ public class MeleeWeapon : WeaponBase
     private float progress = 0f;
     private SpriteRenderer sr;
     private PolygonCollider2D hitbox;
+    private Quaternion currentRotation;
 
     void Start()
     {
+        currentRotation = transform.rotation;
         isAttacking = false;
         progress = 0f;
         sr = GetComponent<SpriteRenderer>();
@@ -44,6 +46,7 @@ public class MeleeWeapon : WeaponBase
         progress = 0f;
         sr.enabled = true;
         hitbox.enabled = true;
+        hitbox.transform.rotation = currentRotation;
 
         Invoke(nameof(StopAttack), attackDuration);
     }
@@ -55,11 +58,12 @@ public class MeleeWeapon : WeaponBase
         Vector3 direction = (mousePosition - transform.position).normalized;
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90;
-        transform.rotation = Quaternion.Euler(0, 0, angle);
+        currentRotation = Quaternion.Euler(0, 0, angle);
     }
 
     private void PerformAttack()
     {
+        hitbox.transform.rotation = currentRotation;
         progress += Time.deltaTime;
         if (progress >= attackDuration)
         {

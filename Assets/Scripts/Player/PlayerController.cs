@@ -33,6 +33,10 @@ public class PlayerController : MonoBehaviour
         // Получение ввода
         moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), 0f);
 
+        // Смотрим положение курсора на экране
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 direction = mousePosition - transform.position;
+
         // Перемещение влево/вправ
         if (!isDashing)
         {
@@ -40,11 +44,11 @@ public class PlayerController : MonoBehaviour
         }
 
         // Перемещение персонажа влево/вправ по горизонтали в воздухе
-        if (moveInput.x < 0f && isFacingRight)
+        if (direction.x < 0 && isFacingRight)
         {
             Flip(); // Поворот спрайта влево
         }
-        else if (moveInput.x > 0f && !isFacingRight)
+        else if (direction.x > 0 && !isFacingRight)
         {
             Flip(); // Поворот спрайта вправо
         }

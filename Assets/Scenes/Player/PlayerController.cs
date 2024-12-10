@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Спуск с платформы
-        if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.S))
         {
             FallThroughPlatform();
         }

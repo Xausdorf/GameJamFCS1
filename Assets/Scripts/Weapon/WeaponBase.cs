@@ -21,7 +21,6 @@ public class WeaponBase : MonoBehaviour
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = mousePos - firePoint.position;
-        transform.right = direction;
 
         GameObject projectile = Instantiate(projectilePrefab, 
                                             firePoint.position + (Vector3)direction.normalized, 

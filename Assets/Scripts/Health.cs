@@ -10,7 +10,7 @@ public abstract class Health : MonoBehaviour
         curHealth = maxHealth;
     }
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         curHealth -= damage;
 
@@ -20,7 +20,7 @@ public abstract class Health : MonoBehaviour
         }
     }
 
-    public void Heal(int heal)
+    public virtual void Heal(int heal)
     {
         curHealth = System.Math.Max(curHealth + heal, maxHealth);
     }

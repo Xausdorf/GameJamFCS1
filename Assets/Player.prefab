@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 5529015499768408159}
   - component: {fileID: 7620571977175633228}
   - component: {fileID: 891495337335337304}
+  - component: {fileID: 6117168651100881324}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -278,6 +279,23 @@ MonoBehaviour:
   maxLifeCount: 3
   curLifeCount: 0
   spawnPoint: {x: 3, y: 3, z: 0}
+--- !u!114 &6117168651100881324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3842660332911265000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18f8f60365706584592cab688b3fb163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grenadePrefab: {fileID: 8438539461474016080, guid: df30f38a85a5b4b48bbde5e5f1e476b4, type: 3}
+  firePoint: {fileID: 4699416781157411479}
+  canThrow: 1
+  remainEnergy: 100
+  energyBar: 0
 --- !u!1 &7330090841966063782
 GameObject:
   m_ObjectHideFlags: 0

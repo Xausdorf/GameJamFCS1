@@ -55,7 +55,7 @@ public class MeleeWeapon : WeaponBase
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        Vector3 direction = (mousePosition - transform.position).normalized;
+        Vector3 direction = (mousePosition - hitbox.transform.position).normalized;
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90;
         currentRotation = Quaternion.Euler(0, 0, angle);

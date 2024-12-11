@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ using UnityEngine;
 public class QuestManager : MonoBehaviour
 {
     public List<Quest> Levels;
+    public int CurLevel = 1;
+    public string sceneToLoadAfterQuestComplete = "NextScene";
 
     void Start()
     {
@@ -25,9 +28,33 @@ public class QuestManager : MonoBehaviour
         }
     }
 
+    void Update() {
+        if (Levels[CurLevel].status == QuestStatus.Completed) {
+            CheckQuestObjectiveCompletion(Levels[CurLevel]);
+        }
+    }
+
+    void Awake()
+    {
+        // Делаем объект неуничтожаемым при смене сцен
+        DontDestroyOnLoad(gameObject);
+    }
+
+    public void UpdateQuestObjective(int questInd)
+    {
+        Levels[questInd].status = QuestStatus.Completed;
+        CheckQuestObjectiveCompletion(Levels[questInd]);
+    }
+
+    private void LoadNextScene()
+    {
+        // Загрузка следующей сцены
+        SceneManager.LoadScene(sceneToLoadAfterQuestComplete);
+    }
+
     private void CheckQuestObjectiveCompletion(Quest quest)
     {
-        bool allObjectivesCompleted = true;
+        bool allObjectivesCompleted = false;
 
         foreach (var objective in quest.objectives)
         {
@@ -49,6 +76,9 @@ public class QuestManager : MonoBehaviour
         {
             quest.status = QuestStatus.Completed;
             // Можете добавить какие-то действия, когда квест завершён
+            CurLevel++;
+            sceneToLoadAfterQuestComplete = $"TestScene{CurLevel}";
+            LoadNextScene();
             Debug.Log("Quest Completed: " + quest.questTitle);
         } else {
             quest.status = QuestStatus.Failed;

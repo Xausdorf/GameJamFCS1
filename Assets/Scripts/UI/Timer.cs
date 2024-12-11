@@ -1,7 +1,7 @@
 namespace UI
 {
-    using UnityEngine;
     using TMPro; // Используйте, если работаете с TextMeshPro
+    using UnityEngine;
 
     public class TimerUI : MonoBehaviour
     {

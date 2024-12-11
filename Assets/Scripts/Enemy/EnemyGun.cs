@@ -4,14 +4,6 @@ public class EnemyGun : WeaponBase
 {
     public GameObject target;
 
-    private void Start()
-    {
-        if (target == null)
-        {
-            target = GameObject.Find("Player");
-        }
-    }
-
     protected override void Update()
     {
         if (Time.time >= nextFireTime)

@@ -323,9 +323,9 @@ GameObject:
   - component: {fileID: 4699416781157411479}
   - component: {fileID: 6873743462509162498}
   - component: {fileID: 5529015499768408159}
-  - component: {fileID: 891495337335337304}
   - component: {fileID: 6117168651100881324}
   - component: {fileID: 6604736600962508243}
+  - component: {fileID: 7390032127224773816}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -397,23 +397,6 @@ MonoBehaviour:
   dashDuration: 0.3
   dashCooldown: 1
   isInvincible: 0
---- !u!114 &891495337335337304
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3842660332911265000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9945e038bde7bd44ad38d4e5dcfad2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  curHealth: 0
-  maxLifeCount: 3
-  curLifeCount: 0
-  spawnPoint: {x: 3, y: 3, z: 0}
 --- !u!114 &6117168651100881324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -463,9 +446,24 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.055073857, y: 0.35115993}
-  m_Size: {x: 0.7248844, y: 1.7983172}
+  m_Offset: {x: -0.06363773, y: 0.37542462}
+  m_Size: {x: 0.65637255, y: 1.6812768}
   m_Direction: 0
+--- !u!114 &7390032127224773816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3842660332911265000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9945e038bde7bd44ad38d4e5dcfad2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  curHealth: 0
+  lifeCountController: {fileID: 0}
 --- !u!1 &6776747597619475622
 GameObject:
   m_ObjectHideFlags: 0

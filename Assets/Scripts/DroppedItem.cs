@@ -4,9 +4,9 @@ public class DroppedItem : MonoBehaviour
 {
     public QuestItem item;
 
-    private void OnTriggerEnter2D(Collider2D collider)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collider.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
             Inventory.instance.AddItem(item);
             Destroy(gameObject);

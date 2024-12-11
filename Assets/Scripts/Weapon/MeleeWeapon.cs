@@ -5,16 +5,16 @@ public class MeleeWeapon : WeaponBase
     public float attackDuration = 0.1f;
     public float attackAngle = 120f;
     public bool isAttacking = false;
+    public SpriteRenderer swordSr;
     private float progress = 0f;
     private SpriteRenderer sr;
     private PolygonCollider2D hitbox;
-    private Quaternion currentRotation;
 
     void Start()
     {
-        currentRotation = transform.rotation;
         isAttacking = false;
         progress = 0f;
+        swordSr.enabled = false;
         sr = GetComponent<SpriteRenderer>();
         hitbox = GetComponent<PolygonCollider2D>();
         sr.enabled = false;
@@ -32,9 +32,6 @@ public class MeleeWeapon : WeaponBase
         if (isAttacking)
         {
             PerformAttack();
-        } else
-        {
-            FollowCursor();
         }
     }
 
@@ -46,24 +43,12 @@ public class MeleeWeapon : WeaponBase
         progress = 0f;
         sr.enabled = true;
         hitbox.enabled = true;
-        hitbox.transform.rotation = currentRotation;
 
         Invoke(nameof(StopAttack), attackDuration);
     }
 
-    private void FollowCursor()
-    {
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        Vector3 direction = (mousePosition - hitbox.transform.position).normalized;
-
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90;
-        currentRotation = Quaternion.Euler(0, 0, angle);
-    }
-
     private void PerformAttack()
     {
-        hitbox.transform.rotation = currentRotation;
         progress += Time.deltaTime;
         if (progress >= attackDuration)
         {
@@ -76,6 +61,18 @@ public class MeleeWeapon : WeaponBase
         isAttacking = false;
         sr.enabled = false;
         hitbox.enabled = false;
+    }
+
+    public override void Activate(bool isActive)
+    {
+        if (isActive)
+        {
+            swordSr.enabled = true;
+        } else
+        {
+            swordSr.enabled = false;
+        }
+        base.Activate(isActive);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

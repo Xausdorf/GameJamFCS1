@@ -34,6 +34,13 @@ public class EnemyHealth : Health
 
     public override void Die()
     {
+        int curQuest = questManager.CurLevel;
+        int cur = questManager.Levels[curQuest].curTask;
+        if (questManager.Levels[curQuest].objectives[cur].Type == 1) {
+            if (Random.Range(0f, 1f) <= 0.5f) {
+                PresentSpawner.instance.SpawnPresent(transform.position);
+            }
+        }
         if (spawner != null)
         {
             spawner.enemyCount--;

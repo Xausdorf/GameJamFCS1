@@ -72,6 +72,10 @@ public class ProgressBar : MonoBehaviour
     private void UpdateGiftTask(int curQuest, int cur) {
         currentProgress = Inventory.instance.GetItemCount("Present") / 10f;
         progressBar.value = currentProgress;
+        if (progressBar.value >= 1) {
+            taskUpdater.UpdateTaskObjectiveUI(false);
+            progressBar.value = 0;
+        }
     }
     public void UpdateTimeProgress()
     {

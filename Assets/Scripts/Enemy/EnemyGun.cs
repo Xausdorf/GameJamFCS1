@@ -6,9 +6,11 @@ public class EnemyGun : WeaponBase
 
     protected override void Update()
     {
+        Vector2 oldDirection = target.transform.position;
         if (Time.time >= nextFireTime)
         {
             Fire();
+            transform.right = oldDirection;
             nextFireTime = Time.time + 1f / fireRate;
         }
     }

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Grenade : MonoBehaviour
@@ -22,7 +21,7 @@ public class Grenade : MonoBehaviour
         rb.AddForce(direction.normalized * throwForce, ForceMode2D.Impulse);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
@@ -30,7 +29,7 @@ public class Grenade : MonoBehaviour
         }
     }
 
-    private void Explode()
+    protected void Explode()
     {
         Collider2D[] hitObjects = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
 
@@ -51,6 +50,7 @@ public class Grenade : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
+        Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, explosionRadius);
     }
 }

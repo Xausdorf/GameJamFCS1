@@ -29,6 +29,14 @@ public class Grenade : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.CompareTag("Enemy"))
+        {
+            Explode();
+        }
+    }
+
     protected void Explode()
     {
         Collider2D[] hitObjects = Physics2D.OverlapCircleAll(transform.position, explosionRadius);

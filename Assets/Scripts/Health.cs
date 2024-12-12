@@ -22,7 +22,7 @@ public abstract class Health : MonoBehaviour
 
     public virtual void Heal(int heal)
     {
-        curHealth = System.Math.Max(curHealth + heal, maxHealth);
+        curHealth = System.Math.Min(curHealth + heal, maxHealth);
     }
 
     public abstract void Die();

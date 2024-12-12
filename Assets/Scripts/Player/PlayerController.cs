@@ -78,6 +78,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void Awake()
+    {
+        // Делаем объект неуничтожаемым при смене сцен
+        DontDestroyOnLoad(gameObject);
+    }
     private void Jump()
     {
         if (isGrounded)

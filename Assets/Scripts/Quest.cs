@@ -39,15 +39,16 @@ public class Quest
     public string questTitle;
     public QuestStatus status;
 
-    public int curTask;
+    public int curTask = 0;
     public int amount;
     public List<TaskObjective> objectives;
 
-    public Quest(string title)
+    public Quest(string title, int size)
     {
         questTitle = title;
         status = QuestStatus.NotStarted;
-        objectives = new List<TaskObjective>();
+        objectives = new List<TaskObjective>(new TaskObjective[size]);
+        amount  = size;
     }
 }
 

@@ -1,27 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class TaskUpdater : MonoBehaviour
 {
     public QuestManager questManager;    // Ссылка на QuestManager
-    public Text subTaskText;
+    public TextMeshProUGUI subTaskText;
     // Start is called before the first frame update
     void Start()
     {
-        if (questManager == null)
-            questManager = FindObjectOfType<QuestManager>(); // Найти QuestManager в сцене
-        UpdateTaskObjectiveUI();
+        questManager = FindObjectOfType<QuestManager>(); // Найти QuestManager в сцене
+        // subTaskText = GameObject.Find("SubTaskText");
+        // int curQuest = questManager.CurLevel;
     }
 
     // Update is called once per frame
     void Update()
     {
-        int curQuest = questManager.CurLevel;
-        int cur = questManager.Levels[curQuest].curTask;
-        if (questManager.Levels[curQuest].objectives[cur].isCompleted) {
-            UpdateTaskObjectiveUI();
+        if (questManager != null) {
+            int curQuest = questManager.CurLevel;
+            int cur = questManager.Levels[curQuest].curTask;
+            subTaskText.text = questManager.Levels[curQuest].objectives[0].QuestDescription;
+            // gameObject.SetActive(true);
+            if (questManager.Levels[curQuest].objectives[cur].isCompleted) {
+                UpdateTaskObjectiveUI();
+                // gameObject.SetActive(true);
+            }
+            // subTaskText.text = "ГОЙДА";
+            if (subTaskText == null) {
+                Debug.LogError("Компонент Text не найден на объекте SubTaskText!");
+            }
+            
         }
     }
 
@@ -32,6 +40,7 @@ public class TaskUpdater : MonoBehaviour
         if (cur < questManager.Levels[curQuest].amount)
         {
             TaskObjective currentSubTask = questManager.Levels[curQuest].objectives[cur];
+            questManager.Levels[curQuest].curTask++;
             subTaskText.text = currentSubTask.QuestDescription; // Обновляем текст подзадачи
         }
     }

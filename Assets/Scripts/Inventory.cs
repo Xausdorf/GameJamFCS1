@@ -41,5 +41,5 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public int GetItemCount(QuestItem item) => items.ContainsKey(item.itemName) ? items[item.itemName] : 0;
+    public int GetItemCount(string itemName) => items.ContainsKey(itemName) ? items[itemName] : 0;
 }

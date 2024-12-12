@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class EnemyGun : WeaponBase
 {
+    public float screenSize = 14.22f;
     public GameObject target;
 
     private void Start()
@@ -25,15 +26,17 @@ public class EnemyGun : WeaponBase
     {
         if (target == null) return;
 
-            Vector2 direction = target.transform.position - firePoint.position;
-            transform.right = direction;
+        if ((firePoint.position - target.transform.position).magnitude > screenSize - 1) return;
 
-            GameObject projectile = Instantiate(projectilePrefab,
-                                    firePoint.position + (Vector3)direction.normalized,
-                                    firePoint.rotation);
+        Vector2 direction = target.transform.position - firePoint.position;
+        transform.right = direction;
 
-            ProjectileBase projectileScript = projectile.GetComponent<ProjectileBase>();
-            projectileScript.direction = direction;
-            projectileScript.damage = damage;
+        GameObject projectile = Instantiate(projectilePrefab,
+                                firePoint.position + (Vector3)direction.normalized,
+                                firePoint.rotation);
+
+        ProjectileBase projectileScript = projectile.GetComponent<ProjectileBase>();
+        projectileScript.direction = direction;
+        projectileScript.damage = damage;
     }
 }

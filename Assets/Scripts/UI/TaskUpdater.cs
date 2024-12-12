@@ -13,8 +13,7 @@ public class TaskUpdater : MonoBehaviour
         // int curQuest = questManager.CurLevel;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateQuest()
     {
         if (questManager != null) {
             int curQuest = questManager.CurLevel;
@@ -22,7 +21,7 @@ public class TaskUpdater : MonoBehaviour
             subTaskText.text = questManager.Levels[curQuest].objectives[0].QuestDescription;
             // gameObject.SetActive(true);
             if (questManager.Levels[curQuest].objectives[cur].isCompleted) {
-                UpdateTaskObjectiveUI();
+                UpdateTaskObjectiveUI(false);
                 // gameObject.SetActive(true);
             }
             // subTaskText.text = "ГОЙДА";
@@ -33,14 +32,15 @@ public class TaskUpdater : MonoBehaviour
         }
     }
 
-    public void UpdateTaskObjectiveUI()
+    public void UpdateTaskObjectiveUI(bool fst)
     {
         int curQuest = questManager.CurLevel;
         int cur = questManager.Levels[curQuest].curTask;
         if (cur < questManager.Levels[curQuest].amount)
         {
-            TaskObjective currentSubTask = questManager.Levels[curQuest].objectives[cur];
-            questManager.Levels[curQuest].curTask++;
+            if (!fst) questManager.Levels[curQuest].curTask++;
+            TaskObjective currentSubTask = questManager.Levels[curQuest].objectives[questManager.Levels[curQuest].curTask];
+            Debug.Log("SHIT");
             subTaskText.text = currentSubTask.QuestDescription; // Обновляем текст подзадачи
         }
     }

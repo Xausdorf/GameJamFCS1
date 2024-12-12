@@ -21,7 +21,6 @@ public class EnemySpawner : MonoBehaviour
     public int enemyCount = default;
     private float timeUntilSpawn = default;
     private int nextEnemy;
-    public GameObject player;
 
 
     // Start is called before the first frame update
@@ -29,7 +28,7 @@ public class EnemySpawner : MonoBehaviour
     {
         timer = GameObject.Find("Canvas").GetComponent<TimerUI>();
         timeUntilSpawn = 10 / tense;
-        player = GameObject.Find("Player");
+        Player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
@@ -67,8 +66,7 @@ public class EnemySpawner : MonoBehaviour
                     spawned.GetComponent<EnemyHealth>().spawner = this;
                 }
             }
-            spawned.GetComponent<AIDestinationSetter>().target = player.transform;
-            spawned.GetComponent<EnemyGun>().target = player;
+            spawned.GetComponent<AIDestinationSetter>().target = Player.transform;
             timeUntilSpawnSet();
         }
         if (timer.totalTime % 15 == 0)

@@ -5,34 +5,25 @@ public class CharacterHealth : MonoBehaviour
 {
     public Slider healthBar; // Перетащите сюда ваш Slider через Inspector
     public float maxHealth = 100f;
-    private float currentHealth;
+    public float currentHealth;
     public Image fillImage; // Укажите Image компонента Fill
+    public PlayerHealth playerHealth;
 
     void Start()
     {
-        currentHealth = maxHealth;
-        UpdateHealthBar();
+        if (playerHealth == null) playerHealth = GameObject.Find("Player").GetComponent<PlayerHealth>();
+        currentHealth = playerHealth.curHealth;
+        healthBar.value = currentHealth / maxHealth * 100;
     }
 
-    public void TakeDamage(float damage)
+    void Update()
     {
-        currentHealth -= damage;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        UpdateHealthBar();
-    }
+        if (playerHealth.curHealth == currentHealth) return;
 
-    public void Heal(float healAmount)
-    {
-        currentHealth += healAmount;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        UpdateHealthBar();
-    }
-
-    private void UpdateHealthBar()
-    {
+        currentHealth = playerHealth.curHealth;
         if (healthBar != null)
         {
-            healthBar.value = currentHealth / maxHealth;
+            healthBar.value = currentHealth / maxHealth * 100;
             
             // Изменение цвета в зависимости от здоровья
             if (fillImage != null)

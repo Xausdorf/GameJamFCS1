@@ -3,6 +3,15 @@ using UnityEngine;
 public class EnemyGun : WeaponBase
 {
     public GameObject target;
+
+    private void Start()
+    {
+        if (target == null)
+        {
+            target = GameObject.Find("Player");
+        }
+    }
+
     protected override void Update()
     {
         if (Time.time >= nextFireTime)
@@ -26,5 +35,5 @@ public class EnemyGun : WeaponBase
             ProjectileBase projectileScript = projectile.GetComponent<ProjectileBase>();
             projectileScript.direction = direction;
             projectileScript.damage = damage;
-        }
     }
+}

@@ -289,6 +289,7 @@ MonoBehaviour:
   maxHealth: 50
   curHealth: 0
   grenadeThrower: {fileID: 0}
+  spawner: {fileID: 0}
 --- !u!58 &4023866736861602170
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -318,7 +319,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.01482439, y: -0.032344043}

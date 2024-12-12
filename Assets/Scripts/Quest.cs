@@ -1,32 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEditor;
 using UnityEngine;
 
 public enum QuestStatus { NotStarted, InProgress, Completed, Failed }
 public class TaskObjective {
     public int Type;
+    public string QuestDescription;
+    public bool isCompleted;
     public QuestChristmasTreeObjective questChristmasTreeObjective;
     public QuestGiftsObjective questGiftsObjective;
     public QuestHuntObjective questHuntObjective;
     public QuestSurvivingObjective questSurvivingObjective;
-    public TaskObjective(int type, int GiftsToCollect) {
-        Type = type;
-        questGiftsObjective = new QuestGiftsObjective(GiftsToCollect);
-    }
-    public TaskObjective(int type, float dur, int health) 
-    {
-        Type = type;
-        questHuntObjective = new QuestHuntObjective(dur, health);
-    }
 
     public TaskObjective(int type) {
         Type = type;
         if (type == 2){
             questChristmasTreeObjective = new QuestChristmasTreeObjective();
+            QuestDescription = QuestChristmasTreeObjective.QuestDescription;
         }
-        else {
+        else if (type == 3) {
             questSurvivingObjective = new QuestSurvivingObjective();
+            QuestDescription = QuestSurvivingObjective.QuestDescription;
+        } else if (type == 1) {
+            questGiftsObjective = new QuestGiftsObjective();
+            QuestDescription = QuestGiftsObjective.QuestDescription;
+        } else {
+            questHuntObjective = new QuestHuntObjective();
+            QuestDescription = QuestHuntObjective.QuestDescription;
         }
     }
 }
@@ -37,26 +39,28 @@ public class Quest
     public string questTitle;
     public QuestStatus status;
 
+    public int curTask = 0;
     public int amount;
     public List<TaskObjective> objectives;
 
-    public Quest(string title)
+    public Quest(string title, int size)
     {
         questTitle = title;
         status = QuestStatus.NotStarted;
-        objectives = new List<TaskObjective>();
+        objectives = new List<TaskObjective>(new TaskObjective[size]);
+        amount  = size;
     }
 }
 
 [System.Serializable]
 public class QuestGiftsObjective
 {
-    public int GiftsToCollect;
+    public static string QuestDescription = "Собрать достаточно подарков";
+    public static int GiftsToCollect = 10;
     public bool isCompleted;
 
-    public QuestGiftsObjective(int GiftsAmount)
+    public QuestGiftsObjective()
     {
-        GiftsToCollect = GiftsAmount;
         isCompleted = false;
     }
 }
@@ -64,6 +68,7 @@ public class QuestGiftsObjective
 [System.Serializable]
 public class QuestChristmasTreeObjective
 {
+    public static string QuestDescription = "Сохранить ёлку";
     public bool isCompleted;
 
     public QuestChristmasTreeObjective()
@@ -74,6 +79,7 @@ public class QuestChristmasTreeObjective
 
 public class QuestSurvivingObjective
 {
+    public static string QuestDescription = "Выжить минуту";
     public bool isCompleted;
 
     public QuestSurvivingObjective()
@@ -84,14 +90,13 @@ public class QuestSurvivingObjective
 
 public class QuestHuntObjective
 {
+    public static string QuestDescription = "Убить наблюдателя";
     public float Duration;
     public float Health;
     public bool isCompleted;
 
-    public QuestHuntObjective(float dur, float health)
+    public QuestHuntObjective()
     {
-        Duration = dur;
-        Health = health;
         isCompleted = false;
     }
 }

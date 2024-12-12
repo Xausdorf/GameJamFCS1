@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -8,26 +9,53 @@ using UnityEngine;
 public class QuestManager : MonoBehaviour
 {
     public List<Quest> Levels;
+    public int CurLevel = 0;
+    public string sceneToLoadAfterQuestComplete = "NextScene";
 
     void Start()
     {
-        Levels = new List<Quest>{new Quest("Уровень 1"), new Quest("Уровень 2"), new Quest("Уровень 3")};
+        Levels = new List<Quest>{new Quest("Уровень 1", 3), new Quest("Уровень 2", 5), new Quest("Уровень 3", 7)};
         System.Random rnd = new();
         foreach(var Level in Levels) {
             int prev = -1;
-            foreach(var task in Level.objectives) {
+            for(int i = 0; i < Level.amount; i++) {
                 int type = rnd.Next(1, 5);
                 if (type == prev) {
                     type = prev + 1 == 5? rnd.Next(0, prev) : rnd.Next(prev + 1, 5);
                 }
-                task.Type = type;
+                TaskObjective task = new TaskObjective(type);
+                Level.objectives[i] = task;
             }
         }
     }
 
+    void Update() {
+        if (Levels[CurLevel].status == QuestStatus.Completed) {
+            CheckQuestObjectiveCompletion(Levels[CurLevel]);
+        }
+    }
+
+    void Awake()
+    {
+        // Делаем объект неуничтожаемым при смене сцен
+        DontDestroyOnLoad(gameObject);
+    }
+
+    public void UpdateQuestObjective(int questInd)
+    {
+        Levels[questInd].status = QuestStatus.Completed;
+        CheckQuestObjectiveCompletion(Levels[questInd]);
+    }
+
+    private void LoadNextScene()
+    {
+        // Загрузка следующей сцены
+        SceneManager.LoadScene(sceneToLoadAfterQuestComplete);
+    }
+
     private void CheckQuestObjectiveCompletion(Quest quest)
     {
-        bool allObjectivesCompleted = true;
+        bool allObjectivesCompleted = quest.status == QuestStatus.Completed ? true : false;
 
         foreach (var objective in quest.objectives)
         {
@@ -49,6 +77,9 @@ public class QuestManager : MonoBehaviour
         {
             quest.status = QuestStatus.Completed;
             // Можете добавить какие-то действия, когда квест завершён
+            CurLevel++;
+            sceneToLoadAfterQuestComplete = $"TestScene{CurLevel + 1}";
+            LoadNextScene();
             Debug.Log("Quest Completed: " + quest.questTitle);
         } else {
             quest.status = QuestStatus.Failed;

@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
-using System.Threading.Tasks;
 using UnityEngine;
 
 // подарки - 1, ёлка - 2, выживание - 3, охота - 4
@@ -39,12 +38,6 @@ public class QuestManager : MonoBehaviour
     {
         // Делаем объект неуничтожаемым при смене сцен
         DontDestroyOnLoad(gameObject);
-    }
-
-    public void UpdateQuestObjective(int questInd)
-    {
-        Levels[questInd].status = QuestStatus.Completed;
-        CheckQuestObjectiveCompletion(Levels[questInd]);
     }
 
     private void LoadNextScene()

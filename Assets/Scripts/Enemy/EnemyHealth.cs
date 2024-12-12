@@ -2,11 +2,13 @@ using UnityEngine;
 
 public class EnemyHealth : Health
 {
+    public QuestManager questManager;
     public PlayerGrenadeThrower grenadeThrower;
     public EnemySpawner spawner;
 
     protected override void Start()
     {
+        questManager = FindObjectOfType<QuestManager>();
         grenadeThrower = GameObject.Find("Player").GetComponent<PlayerGrenadeThrower>();
         maxHealth = 20;
         base.Start();

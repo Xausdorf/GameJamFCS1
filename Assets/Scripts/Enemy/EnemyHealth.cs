@@ -3,6 +3,7 @@ using UnityEngine;
 public class EnemyHealth : Health
 {
     public PlayerGrenadeThrower grenadeThrower;
+    public EnemySpawner spawner;
 
     protected override void Start()
     {
@@ -32,7 +33,10 @@ public class EnemyHealth : Health
 
     public override void Die()
     {
-        EnemySpawner.instance.enemyCount--;
+        if (spawner != null)
+        {
+            spawner.enemyCount--;
+        }
         Destroy(gameObject);
     }
 }

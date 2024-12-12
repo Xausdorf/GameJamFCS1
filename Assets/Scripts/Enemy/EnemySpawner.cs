@@ -21,18 +21,6 @@ public class EnemySpawner : MonoBehaviour
     private float timeUntilSpawn = default;
     private int nextEnemy;
 
-    public static EnemySpawner instance;
-
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        } else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -59,17 +47,20 @@ public class EnemySpawner : MonoBehaviour
             enemyCount++;
             if (nextEnemy <= 70)
             {
-                Instantiate(SpawnerShooter, transform.position, Quaternion.identity);
+                GameObject spawned = Instantiate(SpawnerShooter, transform.position, Quaternion.identity);
+                spawned.GetComponent<EnemyHealth>().spawner = this;
             }
             else
             {
                 if (nextEnemy <= 90)
                 {
-                    Instantiate(SpawnerShotgunner, transform.position, Quaternion.identity);
+                    GameObject spawned = Instantiate(SpawnerShotgunner, transform.position, Quaternion.identity);
+                    spawned.GetComponent<EnemyHealth>().spawner = this;
                 }
                 else
                 {
-                    Instantiate(SpawnerBomber, transform.position, Quaternion.identity);
+                    GameObject spawned = Instantiate(SpawnerBomber, transform.position, Quaternion.identity);
+                    spawned.GetComponent<EnemyHealth>().spawner = this;
                 }
             }
             timeUntilSpawnSet();

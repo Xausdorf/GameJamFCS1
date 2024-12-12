@@ -1,3 +1,4 @@
+using Pathfinding;
 using UI;
 using UnityEngine;
 public class EnemySpawner : MonoBehaviour
@@ -20,6 +21,7 @@ public class EnemySpawner : MonoBehaviour
     public int enemyCount = default;
     private float timeUntilSpawn = default;
     private int nextEnemy;
+    public GameObject player;
 
 
     // Start is called before the first frame update
@@ -27,6 +29,7 @@ public class EnemySpawner : MonoBehaviour
     {
         timer = GameObject.Find("Canvas").GetComponent<TimerUI>();
         timeUntilSpawn = 10 / tense;
+        player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
@@ -45,24 +48,26 @@ public class EnemySpawner : MonoBehaviour
         {
             nextEnemy = Random.Range(0, 100);
             enemyCount++;
+            GameObject spawned;
             if (nextEnemy <= 70)
             {
-                GameObject spawned = Instantiate(SpawnerShooter, transform.position, Quaternion.identity);
+                spawned = Instantiate(SpawnerShooter, transform.position, Quaternion.identity);
                 spawned.GetComponent<EnemyHealth>().spawner = this;
             }
             else
             {
                 if (nextEnemy <= 90)
                 {
-                    GameObject spawned = Instantiate(SpawnerShotgunner, transform.position, Quaternion.identity);
+                    spawned = Instantiate(SpawnerShotgunner, transform.position, Quaternion.identity);
                     spawned.GetComponent<EnemyHealth>().spawner = this;
                 }
                 else
                 {
-                    GameObject spawned = Instantiate(SpawnerBomber, transform.position, Quaternion.identity);
+                    spawned = Instantiate(SpawnerBomber, transform.position, Quaternion.identity);
                     spawned.GetComponent<EnemyHealth>().spawner = this;
                 }
             }
+            spawned.GetComponent<AIDestinationSetter>().target = player.transform;
             timeUntilSpawnSet();
         }
         if (timer.totalTime % 15 == 0)

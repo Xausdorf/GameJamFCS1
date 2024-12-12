@@ -17,7 +17,8 @@ public class SleighBomberController : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         sr.enabled = false;
         lastBombCoord = -xBorder;
-        // Invoke(nameof(Activate), 5f);
+        transform.position = new Vector2(-xBorder, yCoord);
+        Invoke(nameof(Activate), 5f);
     }
 
     void Update()

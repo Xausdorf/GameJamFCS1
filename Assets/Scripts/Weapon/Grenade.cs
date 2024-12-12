@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Grenade : MonoBehaviour
 {
+    public GameObject explosionPrefab;
     public float throwForce = 10f;
     public float explosionRadius = 2f;
     public float explosionDelay = 3f;
@@ -39,6 +40,9 @@ public class Grenade : MonoBehaviour
 
     protected void Explode()
     {
+        GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.Euler(0, 0, Random.Range(0, 90)));
+        Destroy(explosion, 0.2f);
+
         Collider2D[] hitObjects = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
 
         foreach (Collider2D hitObject in hitObjects)

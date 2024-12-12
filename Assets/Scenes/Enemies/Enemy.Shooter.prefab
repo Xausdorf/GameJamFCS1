@@ -222,7 +222,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8235577022127051914, guid: 777412a65cc5a89468428c23fc2e0a89, type: 3}
       propertyPath: m_Name
-      value: Enemy.Shooter 1
+      value: Enemy.Shooter
       objectReference: {fileID: 0}
     - target: {fileID: 8235577022127051914, guid: 777412a65cc5a89468428c23fc2e0a89, type: 3}
       propertyPath: m_TagString
@@ -248,6 +248,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8235577022127051914, guid: 777412a65cc5a89468428c23fc2e0a89, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5438174875849796131}
+    - targetCorrespondingSourceObject: {fileID: 8235577022127051914, guid: 777412a65cc5a89468428c23fc2e0a89, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4023866736861602170}
   m_SourcePrefab: {fileID: 100100000, guid: 777412a65cc5a89468428c23fc2e0a89, type: 3}
 --- !u!4 &3575922013629967644 stripped
 Transform:
@@ -286,6 +289,41 @@ MonoBehaviour:
   maxHealth: 50
   curHealth: 0
   grenadeThrower: {fileID: 0}
+--- !u!58 &4023866736861602170
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3682835933889977885}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.01482439, y: -0.032344043}
+  serializedVersion: 2
+  m_Radius: 0.7493186
 --- !u!1001 &4829412660269515645
 PrefabInstance:
   m_ObjectHideFlags: 0

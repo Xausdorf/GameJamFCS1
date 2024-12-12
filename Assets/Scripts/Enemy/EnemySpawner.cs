@@ -16,24 +16,26 @@ public class EnemySpawner : MonoBehaviour
     private GameObject Player;
     [SerializeField]
     private bool isLeft;
-    TimerUI timer;
+    public float tenseCooldown = 15f;
     public int tense = 2;
     public int enemyCount = default;
     private float timeUntilSpawn = default;
+    private float timeUntilTenseInc;
     private int nextEnemy;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        timer = GameObject.Find("Canvas").GetComponent<TimerUI>();
         timeUntilSpawn = 10 / tense;
+        timeUntilTenseInc = 0;
         Player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
     private void Update()
     {
+        timeUntilTenseInc += Time.deltaTime;
         if (isLeft)
         {
             Spawner.transform.position = new Vector2(Player.transform.position.x - 20, Player.transform.position.y);
@@ -69,9 +71,10 @@ public class EnemySpawner : MonoBehaviour
             spawned.GetComponent<AIDestinationSetter>().target = Player.transform;
             timeUntilSpawnSet();
         }
-        if (timer.totalTime % 15 == 0)
+        if (timeUntilTenseInc >= tenseCooldown)
         {
-            tense++; // почините :(((
+            timeUntilTenseInc = 0;
+            tense++;
         }
     }
     private void timeUntilSpawnSet()

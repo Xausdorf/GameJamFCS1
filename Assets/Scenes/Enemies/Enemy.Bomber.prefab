@@ -117,7 +117,7 @@ MonoBehaviour:
   explosionPrefab: {fileID: 865539258428464882, guid: 5e98f9f36ae694b43a4520532b5c6c41, type: 3}
   explosionRadius: 3
   explosionDamage: 30
-  accelerationRadius: 8
+  accelerationRadius: 5
   acceleration: 5
 --- !u!114 &4293936141318768457
 MonoBehaviour:

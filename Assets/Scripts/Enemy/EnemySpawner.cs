@@ -15,7 +15,7 @@ public class EnemySpawner : MonoBehaviour
     private GameObject Player;
     [SerializeField]
     private bool isLeft;
-    TimerUI timer = GameObject.Find("TimerText").GetComponent<TimerUI>();
+    TimerUI timer;
     public int tense = 2;
     private int enemyCount = default;
     private float timeUntilSpawn = default;
@@ -23,6 +23,7 @@ public class EnemySpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        timer = GameObject.Find("Canvas").GetComponent<TimerUI>();
         timeUntilSpawn = 10 / tense;
     }
 

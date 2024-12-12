@@ -32,6 +32,7 @@ public class EnemyHealth : Health
 
     public override void Die()
     {
+        EnemySpawner.instance.enemyCount--;
         Destroy(gameObject);
     }
 }

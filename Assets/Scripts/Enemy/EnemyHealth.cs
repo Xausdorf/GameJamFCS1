@@ -10,7 +10,6 @@ public class EnemyHealth : Health
     {
         questManager = FindObjectOfType<QuestManager>();
         grenadeThrower = GameObject.Find("Player").GetComponent<PlayerGrenadeThrower>();
-        maxHealth = 20;
         base.Start();
     }
 

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyShotgun : EnemyGun
@@ -8,30 +6,27 @@ public class EnemyShotgun : EnemyGun
     public int pelletCount = 3;
     [SerializeField]
     public int spread = 15;
+
     protected override void Fire()
     {
         if (target == null) return;
 
+        if ((firePoint.position - target.transform.position).magnitude > screenSize - 1) return;
+
         Vector2 direction = target.transform.position - firePoint.position;
         transform.right = direction;
 
-        GameObject projectile = Instantiate(projectilePrefab,
-                                            firePoint.position + (Vector3)direction.normalized,
-                                            firePoint.rotation);
+        for (int i = 0; i < pelletCount; i++)
+        {
+            Vector3 pelletDirection = Quaternion.Euler(0, 0, spread * (i - pelletCount / 2)) * (Vector3)direction;
 
-        ProjectileBase projectileScript = projectile.GetComponent<ProjectileBase>();
-        projectileScript.direction = direction;
-        projectileScript.damage = damage;
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+            GameObject projectile = Instantiate(projectilePrefab,
+                                firePoint.position + pelletDirection.normalized,
+                                firePoint.rotation);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+            ProjectileBase projectileScript = projectile.GetComponent<ProjectileBase>();
+            projectileScript.direction = pelletDirection;
+            projectileScript.damage = damage;
+        }
     }
 }

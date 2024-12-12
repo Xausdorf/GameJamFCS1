@@ -8,7 +8,6 @@ public class EnemyHealth : Health
     protected override void Start()
     {
         grenadeThrower = GameObject.Find("Player").GetComponent<PlayerGrenadeThrower>();
-        maxHealth = 20;
         base.Start();
     }
 

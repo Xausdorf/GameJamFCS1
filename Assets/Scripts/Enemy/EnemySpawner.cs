@@ -68,7 +68,9 @@ public class EnemySpawner : MonoBehaviour
                     spawned.GetComponent<EnemyHealth>().spawner = this;
                 }
             }
-            spawned.GetComponent<AIDestinationSetter>().target = Player.transform;
+            AIDestinationSetter aIDestinationSetter = spawned.GetComponent<AIDestinationSetter>();
+            if (aIDestinationSetter != null) aIDestinationSetter.target = Player.transform;
+
             timeUntilSpawnSet();
         }
         if (timeUntilTenseInc >= tenseCooldown)

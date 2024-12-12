@@ -68,6 +68,7 @@ public class EnemySpawner : MonoBehaviour
                 }
             }
             spawned.GetComponent<AIDestinationSetter>().target = player.transform;
+            spawned.GetComponent<EnemyGun>().target = player;
             timeUntilSpawnSet();
         }
         if (timer.totalTime % 15 == 0)

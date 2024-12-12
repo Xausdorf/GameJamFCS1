@@ -129,8 +129,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67ae5992367fb9d4d87f0e17c180e76c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnerShooter: {fileID: 0}
-  SpawnerShotgunner: {fileID: 0}
-  SpawnerBomber: {fileID: 0}
+  SpawnerShooter: {fileID: 3682835933889977885, guid: 398cb01565e455140b2c40fbb4b1e132, type: 3}
+  SpawnerShotgunner: {fileID: 3504021122151711286, guid: 1fb03f00cf902a947a544081ae2ca154, type: 3}
+  SpawnerBomber: {fileID: 6315957945739981411, guid: 81e164d290e461f46b52d557cbeb3d65, type: 3}
   Spawner: {fileID: 3931476230502191168}
+  Player: {fileID: 0}
+  isLeft: 0
   tense: 2
+  enemyCount: 0
+  player: {fileID: 0}

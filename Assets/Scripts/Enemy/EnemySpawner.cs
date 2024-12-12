@@ -36,13 +36,14 @@ public class EnemySpawner : MonoBehaviour
     private void Update()
     {
         timeUntilTenseInc += Time.deltaTime;
+        float newPositionY = Random.Range(Mathf.Max(Player.transform.position.y - 7f, 0.5f), Player.transform.position.y + 7f);
         if (isLeft)
         {
-            Spawner.transform.position = new Vector2(Player.transform.position.x - 30, Player.transform.position.y);
+            Spawner.transform.position = new Vector2(Player.transform.position.x - 30, newPositionY);
         }
         else
         {
-            Spawner.transform.position = new Vector2(Player.transform.position.x + 30, Player.transform.position.y);
+            Spawner.transform.position = new Vector2(Player.transform.position.x + 30, newPositionY);
         }
         timeUntilSpawn -= Time.deltaTime;
         if ((timeUntilSpawn < 0) && (enemyCount < tense))
@@ -70,6 +71,8 @@ public class EnemySpawner : MonoBehaviour
             }
             AIDestinationSetter aIDestinationSetter = spawned.GetComponent<AIDestinationSetter>();
             if (aIDestinationSetter != null) aIDestinationSetter.target = Player.transform;
+            FollowTarget followTarget = spawned.GetComponent<FollowTarget>();
+            if (followTarget != null) followTarget.target = Player;
 
             timeUntilSpawnSet();
         }

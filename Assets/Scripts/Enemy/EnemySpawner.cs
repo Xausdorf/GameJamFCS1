@@ -15,7 +15,7 @@ public class EnemySpawner : MonoBehaviour
     private GameObject Player;
     [SerializeField]
     private bool isLeft;
-    TimerUI timer = new TimerUI();
+    TimerUI timer = GameObject.Find("TimerText").GetComponent<TimerUI>();
     public int tense = 2;
     private int enemyCount = default;
     private float timeUntilSpawn = default;
@@ -41,6 +41,7 @@ public class EnemySpawner : MonoBehaviour
         if ((timeUntilSpawn < 0) && (enemyCount < tense))
         {
             nextEnemy = Random.Range(0, 100);
+            enemyCount++;
             if (nextEnemy <= 70)
             {
                 Instantiate(SpawnerShooter, transform.position, Quaternion.identity);
@@ -60,7 +61,7 @@ public class EnemySpawner : MonoBehaviour
         }
         if (timer.totalTime % 15 == 0)
         {
-            tense += (int)timer.totalTime;
+            tense++; // почините :(((
         }
     }
     private void timeUntilSpawnSet()

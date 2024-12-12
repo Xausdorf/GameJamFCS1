@@ -38,11 +38,11 @@ public class EnemySpawner : MonoBehaviour
         timeUntilTenseInc += Time.deltaTime;
         if (isLeft)
         {
-            Spawner.transform.position = new Vector2(Player.transform.position.x - 20, Player.transform.position.y);
+            Spawner.transform.position = new Vector2(Player.transform.position.x - 30, Player.transform.position.y);
         }
         else
         {
-            Spawner.transform.position = new Vector2(Player.transform.position.x + 20, Player.transform.position.y);
+            Spawner.transform.position = new Vector2(Player.transform.position.x + 30, Player.transform.position.y);
         }
         timeUntilSpawn -= Time.deltaTime;
         if ((timeUntilSpawn < 0) && (enemyCount < tense))

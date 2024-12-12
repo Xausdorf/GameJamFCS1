@@ -28,6 +28,7 @@ public class PlayerLifeCountController : MonoBehaviour
 
         curLifeCount--;
         isDead = true;
+        spawnPoint = transform.position + 2 * Vector3.up;
         if (curLifeCount <= 0)
         {
             Destroy(player);

@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 
 // подарки - 1, ёлка - 2, выживание - 3, охота - 4
-
 public class QuestManager : MonoBehaviour
 {
     public List<Quest> Levels;
@@ -22,14 +21,8 @@ public class QuestManager : MonoBehaviour
             int prev = -1;
             for(int i = 0; i < Level.amount; i++) {
                 int type = rnd.Next(1, 5);
-                if (type == prev) {
-                    type = prev + 1 == 5? rnd.Next(1, prev == 1? 2:prev) : rnd.Next(prev + 1, 5);
-                }
-                if (type == 2) {
-                    type = 3;
-                }
-                if (type == 0) {
-                    type = 4;
+                while (type == prev || type == 2) {
+                    type = rnd.Next(1, 5);
                 }
                 TaskObjective task = new TaskObjective(type);
                 Level.objectives[i] = task;

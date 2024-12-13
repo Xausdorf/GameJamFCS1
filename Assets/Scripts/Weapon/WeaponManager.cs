@@ -6,8 +6,11 @@ public class WeaponManager : MonoBehaviour
     public List<WeaponBase> weapons;
     public int curWeapon = 0;
 
+    public AudioSource audioSource;
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+
         weapons = new List<WeaponBase>();
         foreach (Transform weapon in transform)
         {
@@ -30,6 +33,8 @@ public class WeaponManager : MonoBehaviour
 
     private void SwitchToIndex(int newIndex)
     {
+        if (audioSource != null) audioSource.Play();
+
         weapons[curWeapon].Activate(false);
         weapons[newIndex].Activate(true);
         curWeapon = newIndex;

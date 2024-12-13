@@ -7,6 +7,12 @@ public class WeaponBase : MonoBehaviour
     public float fireRate = 1f;
     public int damage = 10;
     protected float nextFireTime;
+    public AudioSource audioSource;
+
+    protected virtual void Start()
+    {
+        audioSource = GetComponent<AudioSource>();     
+    }
 
     protected virtual void Update()
     {
@@ -19,6 +25,7 @@ public class WeaponBase : MonoBehaviour
 
     protected virtual void Fire()
     {
+        if (audioSource != null) audioSource.Play();
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = mousePos - firePoint.position;
 

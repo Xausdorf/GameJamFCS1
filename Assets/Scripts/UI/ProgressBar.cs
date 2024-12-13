@@ -13,6 +13,10 @@ public class ProgressBar : MonoBehaviour
 
     public TaskUpdater taskUpdater;
 
+    public bool fstspawnObserver = true;
+
+    private GameObject spawned;
+
     public bool fst = true;
     private float currentProgress = 0f;  // Текущий прогресс
 
@@ -30,7 +34,20 @@ public class ProgressBar : MonoBehaviour
             UpdateSurvivalTask(curQuest, cur);
         } else if (questManager.Levels[curQuest].objectives[cur].Type == 4) {
             // Debug.Log("kmdskdm");
-            UpdateHuntTask(curQuest, cur);
+            if (fstspawnObserver) {
+                Debug.Log("Goyda");
+                spawned = ObserverSpawner.instance.Spawn(questManager.player.transform.position + Vector3.up * 5);
+                fstspawnObserver = false;
+            }
+            if (spawned == null) {
+                progressBar.value = 1;
+                UpdateHuntTask(curQuest, cur);
+            }
+            if (Mathf.Abs(spawned.transform.position.x) >= 80) {
+                Destroy(spawned);
+                questManager.Fail();
+            }
+            
         } else if (questManager.Levels[curQuest].objectives[cur].Type == 2){
             UpdateChristmasTreeTask(curQuest, cur);
         } else {
@@ -53,11 +70,11 @@ public class ProgressBar : MonoBehaviour
         }
     }
 
-    public IEnumerator UpdateHuntTask(int curQuest, int cur) {
-        yield return new WaitForSeconds(2);
-        progressBar.value = 1;
+    public void UpdateHuntTask(int curQuest, int cur) {
+        
         if (progressBar.value == 1) {
             progressBar.value = 0;
+            fstspawnObserver = true;
             questManager.Levels[curQuest].objectives[cur].isCompleted = true;
             progressBar.value = 0f;
             Debug.Log("Goyda");
@@ -99,6 +116,8 @@ public class ProgressBar : MonoBehaviour
 
     void Start()
     {
+        spawned = null;
+        fstspawnObserver = true;
         progressBar.value = 0f;  // Начинаем с нулевого прогресса
         questManager = FindObjectOfType<QuestManager>();
         taskUpdater = FindObjectOfType<TaskUpdater>();

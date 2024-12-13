@@ -564,7 +564,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -589,7 +589,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 7
-  jumpForce: 10
+  jumpForce: 15
   dashSpeed: 20
   dashDuration: 0.3
   dashCooldown: 1
@@ -612,7 +612,7 @@ MonoBehaviour:
   grenadePrefab: {fileID: 8438539461474016080, guid: df30f38a85a5b4b48bbde5e5f1e476b4, type: 3}
   firePoint: {fileID: 4699416781157411479}
   canThrow: 1
-  remainEnergy: 100
+  remainEnergy: 400
   energyBar: 0
 --- !u!70 &6604736600962508243
 CapsuleCollider2D:

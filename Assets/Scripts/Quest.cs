@@ -55,7 +55,7 @@ public class Quest
 [System.Serializable]
 public class QuestGiftsObjective
 {
-    public static string QuestDescription = "Собрать достаточно подарков";
+    public static string QuestDescription = "Доставить подарки в дымоходы";
     public static int GiftsToCollect = 10;
     public bool isCompleted;
 

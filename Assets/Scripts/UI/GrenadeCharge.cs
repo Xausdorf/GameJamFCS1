@@ -13,11 +13,14 @@ public class GrenadeCharge : MonoBehaviour
     {
         if (grenadeThrower == null) grenadeThrower = GameObject.Find("Player").GetComponent<PlayerGrenadeThrower>();
         currentCharge = grenadeThrower.energyBar;
+        maxCharge = grenadeThrower.remainEnergy;
         chargeBar.value = currentCharge / maxCharge * 100;
     }
 
     void Update()
     {
+        if (grenadeThrower == null) return;
+
         if (grenadeThrower.energyBar == currentCharge) return;
 
         currentCharge = grenadeThrower.energyBar;

@@ -148,6 +148,8 @@ namespace Pathfinding {
 		/// </summary>
 		static void UpdateCheckLoop () {
 			// Go on until the update check has been completed
+			return;
+
 			if (!CheckForUpdates()) {
 				EditorApplication.update -= UpdateCheckLoop;
 			}

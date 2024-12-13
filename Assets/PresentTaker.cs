@@ -46,7 +46,7 @@ public class PresentTaker : MonoBehaviour
         {
             contactTime += Time.deltaTime; // Увеличиваем таймер
 
-            if (contactTime >= 2f)
+            if (contactTime >= 1f)
             {
                 if (Inventory.instance.items["Present"] > 0) {
                     Inventory.instance.RemoveItem("Present");

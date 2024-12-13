@@ -5,12 +5,12 @@ public class PlayerGrenadeThrower : MonoBehaviour
     public GameObject grenadePrefab;
     public Transform firePoint;
     public bool canThrow = true;
-    public int remainEnergy = 100;
+    public int remainEnergy = 400;
     public int energyBar = 0;
 
     void Start()
     {
-        canThrow = true;
+        canThrow = false;
         energyBar = 0;
     }
 

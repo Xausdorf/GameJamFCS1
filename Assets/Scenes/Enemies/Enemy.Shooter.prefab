@@ -177,6 +177,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 313877385511856558, guid: 777412a65cc5a89468428c23fc2e0a89, type: 3}
+      propertyPath: maxSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 313877385511856558, guid: 777412a65cc5a89468428c23fc2e0a89, type: 3}
       propertyPath: enableRotation
       value: 0
       objectReference: {fileID: 0}
@@ -434,6 +438,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3575922013629967644}
     m_Modifications:
+    - target: {fileID: 2726945155589637728, guid: 0612caea03cba2446af4b895a3425e93, type: 3}
+      propertyPath: damage
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2726945155589637728, guid: 0612caea03cba2446af4b895a3425e93, type: 3}
       propertyPath: firePoint
       value: 

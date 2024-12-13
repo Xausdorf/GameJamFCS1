@@ -15,7 +15,7 @@ public class EnemySpawner : MonoBehaviour
     private GameObject Player;
     [SerializeField]
     private bool isLeft;
-    public float tenseCooldown = 15f;
+    public float tenseCooldown = 30f;
     public int tense = 2;
     public int enemyCount = default;
     private float timeUntilSpawn = default;

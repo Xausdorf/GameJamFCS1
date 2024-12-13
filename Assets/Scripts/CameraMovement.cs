@@ -26,4 +26,10 @@ public class CameraFollow2D : MonoBehaviour
             transform.position = smoothedPosition;
         }
     }
+
+    void Awake()
+    {
+        // Делаем объект неуничтожаемым при смене сцен
+        DontDestroyOnLoad(gameObject);
+    }
 }

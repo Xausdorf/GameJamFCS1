@@ -110,7 +110,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 0}
   firePoint: {fileID: 4699416781157411479}
   fireRate: 1
-  damage: 10
+  damage: 15
   audioSource: {fileID: 0}
   attackDuration: 0.1
   attackAngle: 120
@@ -326,7 +326,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 4099963032482590554, guid: 6b3a0ad5c74f5e34ca981594cd124987, type: 3}
   firePoint: {fileID: 4699416781157411479}
   fireRate: 3
-  damage: 10
+  damage: 20
   audioSource: {fileID: 0}
 --- !u!82 &6577253925996852932
 AudioSource:

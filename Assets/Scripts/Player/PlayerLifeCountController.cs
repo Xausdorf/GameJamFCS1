@@ -50,4 +50,10 @@ public class PlayerLifeCountController : MonoBehaviour
 
         player.transform.position = spawnPoint;
     }
+
+    void Awake()
+    {
+        // Делаем объект неуничтожаемым при смене сцен
+        DontDestroyOnLoad(gameObject);
+    }
 }

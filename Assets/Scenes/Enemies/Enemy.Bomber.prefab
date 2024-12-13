@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2a4a6d7cd6dcb047b61a163c77e04f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 15
+  maxHealth: 20
   curHealth: 0
   questManager: {fileID: 0}
   grenadeThrower: {fileID: 0}
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionPrefab: {fileID: 865539258428464882, guid: 5e98f9f36ae694b43a4520532b5c6c41, type: 3}
   explosionRadius: 3
-  explosionDamage: 30
+  explosionDamage: 20
   accelerationRadius: 5
   acceleration: 5
 --- !u!114 &4293936141318768457

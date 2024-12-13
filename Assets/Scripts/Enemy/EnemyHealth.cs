@@ -36,6 +36,7 @@ public class EnemyHealth : Health
     {
         int curQuest = questManager.CurLevel;
         int cur = questManager.Levels[curQuest].curTask;
+        // Debug.Log(questManager.Levels[curQuest].objectives[cur].Type);
         if (questManager.Levels[curQuest].objectives[cur].Type == 1) {
             if (Random.Range(0f, 1f) <= 0.5f) {
                 PresentSpawner.instance.SpawnPresent(transform.position);

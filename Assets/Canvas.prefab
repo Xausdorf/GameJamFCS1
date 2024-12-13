@@ -217,7 +217,10 @@ MonoBehaviour:
   progressBar: {fileID: 1518636422367618841}
   questManager: {fileID: 0}
   taskUpdater: {fileID: 0}
+  fstspawnObserver: 1
+  playerLifeCountController: {fileID: 0}
   fst: 1
+  health: {fileID: 0}
 --- !u!1 &1765774333897479049
 GameObject:
   m_ObjectHideFlags: 0
@@ -1515,7 +1518,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 895896857d54ca84f91483c067f7bf3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chargeBar: {fileID: 0}
+  chargeBar: {fileID: 1601274444811346214}
   maxCharge: 100
   currentCharge: 0
   fillImage: {fileID: 0}

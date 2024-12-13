@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,13 +26,19 @@ public class ProgressBar : MonoBehaviour
             fst = false;
         }
         if (questManager.Levels[curQuest].objectives[cur].Type == 3) {
+            // Debug.Log("kmdskdm");
             UpdateSurvivalTask(curQuest, cur);
         } else if (questManager.Levels[curQuest].objectives[cur].Type == 4) {
+            // Debug.Log("kmdskdm");
             UpdateHuntTask(curQuest, cur);
-        } else if (questManager.Levels[curQuest].objectives[cur].Type == 1) {
-            UpdateGiftTask(curQuest, cur);
-        } else {
+        } else if (questManager.Levels[curQuest].objectives[cur].Type == 2){
             UpdateChristmasTreeTask(curQuest, cur);
+        } else {
+            if (progressBar.value >= 1f) {
+                Debug.Log("Big goyda");
+                progressBar.value = 0;
+                taskUpdater.UpdateTaskObjectiveUI(false);
+            }
         }
     }
 
@@ -40,6 +47,7 @@ public class ProgressBar : MonoBehaviour
         if (currentProgress >= 1) {
             questManager.Levels[curQuest].objectives[cur].isCompleted = true;
             progressBar.value = 0f;
+            currentProgress = 0f;
             Debug.Log("Goyda");
             taskUpdater.UpdateTaskObjectiveUI(false);
         }
@@ -63,23 +71,23 @@ public class ProgressBar : MonoBehaviour
         if (progressBar.value == 1) {
             progressBar.value = 0;
             questManager.Levels[curQuest].objectives[cur].isCompleted = true;
-            progressBar.value = 0f;
             Debug.Log("Goyda");
             taskUpdater.UpdateTaskObjectiveUI(false);
         }
     }
 
-    private void UpdateGiftTask(int curQuest, int cur) {
-        currentProgress = Inventory.instance.GetItemCount("Present") / 10f;
+    public void UpdateGiftTask() {
+        currentProgress += 1f / 10f;
         progressBar.value = currentProgress;
         if (progressBar.value >= 1) {
             taskUpdater.UpdateTaskObjectiveUI(false);
             progressBar.value = 0;
+            currentProgress = 0f;
         }
     }
     public void UpdateTimeProgress()
     {
-        currentProgress += 1f/20f * Time.deltaTime; 
+        currentProgress += 1f/60f * Time.deltaTime; 
         progressBar.value = currentProgress;
     }
 

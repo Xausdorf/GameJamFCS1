@@ -22,6 +22,9 @@ public class QuestManager : MonoBehaviour
                 if (type == prev) {
                     type = prev + 1 == 5? rnd.Next(0, prev) : rnd.Next(prev + 1, 5);
                 }
+                if (type == 2) {
+                    type = prev + 1== 5? 1 : prev + 1;
+                }
                 TaskObjective task = new TaskObjective(type);
                 Level.objectives[i] = task;
             }

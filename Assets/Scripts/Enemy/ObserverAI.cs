@@ -5,6 +5,7 @@ public class ObserverAI : MonoBehaviour
     public Transform target;
     public float speed = 8f;
     public Vector2 direction = new Vector2(1, 1);
+    public float downTime = 0.5f;
 
     void Start()
     {
@@ -14,6 +15,13 @@ public class ObserverAI : MonoBehaviour
     void Update()
     {
         if (target == null) return;
+
+        if (downTime > 0)
+        {
+            downTime -= Time.deltaTime;
+            transform.position += Vector3.down * speed * Time.deltaTime;
+            return;
+        }
 
         Vector3 move = direction.normalized * speed * Time.deltaTime;
         Vector3 toTarget = transform.position - target.position;

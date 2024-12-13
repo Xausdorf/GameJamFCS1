@@ -5,11 +5,13 @@ public class EnemyHealth : Health
     public QuestManager questManager;
     public PlayerGrenadeThrower grenadeThrower;
     public EnemySpawner spawner;
+    public AudioSource audioSource;
 
     protected override void Start()
     {
         questManager = FindObjectOfType<QuestManager>();
         grenadeThrower = GameObject.Find("Player").GetComponent<PlayerGrenadeThrower>();
+        audioSource = GetComponent<AudioSource>();
         base.Start();
     }
 
@@ -36,6 +38,7 @@ public class EnemyHealth : Health
     {
         int curQuest = questManager.CurLevel;
         int cur = questManager.Levels[curQuest].curTask;
+        // Debug.Log(questManager.Levels[curQuest].objectives[cur].Type);
         if (questManager.Levels[curQuest].objectives[cur].Type == 1) {
             if (Random.Range(0f, 1f) <= 0.5f) {
                 PresentSpawner.instance.SpawnPresent(transform.position);
@@ -45,6 +48,9 @@ public class EnemyHealth : Health
         {
             spawner.enemyCount--;
         }
+
+        if (audioSource != null) audioSource.Play();
+
         Destroy(gameObject);
     }
 }

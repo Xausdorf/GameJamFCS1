@@ -13,6 +13,8 @@ public class EnemyShotgun : EnemyGun
 
         if ((firePoint.position - target.transform.position).magnitude > screenSize - 1) return;
 
+        if (audioSource != null) audioSource.Play();
+
         Vector2 direction = target.transform.position - firePoint.position;
         transform.right = direction;
 

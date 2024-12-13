@@ -5,12 +5,13 @@ public class EnemyGun : WeaponBase
     public float screenSize = 14.22f;
     public GameObject target;
 
-    private void Start()
+    protected override void Start()
     {
         if (target == null)
         {
             target = GameObject.Find("Player");
         }
+        base.Start();
     }
 
     protected override void Update()
@@ -27,6 +28,8 @@ public class EnemyGun : WeaponBase
         if (target == null) return;
 
         if ((firePoint.position - target.transform.position).magnitude > screenSize - 1) return;
+
+        if (audioSource != null) audioSource.Play();
 
         Vector2 direction = target.transform.position - firePoint.position;
         transform.right = direction;

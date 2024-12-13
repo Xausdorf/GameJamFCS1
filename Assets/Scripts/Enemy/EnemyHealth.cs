@@ -5,11 +5,13 @@ public class EnemyHealth : Health
     public QuestManager questManager;
     public PlayerGrenadeThrower grenadeThrower;
     public EnemySpawner spawner;
+    public AudioSource audioSource;
 
     protected override void Start()
     {
         questManager = FindObjectOfType<QuestManager>();
         grenadeThrower = GameObject.Find("Player").GetComponent<PlayerGrenadeThrower>();
+        audioSource = GetComponent<AudioSource>();
         base.Start();
     }
 
@@ -45,6 +47,9 @@ public class EnemyHealth : Health
         {
             spawner.enemyCount--;
         }
+
+        if (audioSource != null) audioSource.Play();
+
         Destroy(gameObject);
     }
 }

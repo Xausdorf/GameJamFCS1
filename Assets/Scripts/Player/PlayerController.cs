@@ -22,10 +22,15 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 moveInput;
 
+    public AudioClip dashSound;
+    public AudioClip jumpSound;
+    public AudioSource audioSource;
+
     void Start()
     {
         nextDashTime = 0;
         rb = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
         // animator = GetComponent<Animator>();  // если у вас есть аниматор
     }
 
@@ -85,6 +90,8 @@ public class PlayerController : MonoBehaviour
     }
     private void Jump()
     {
+        if (audioSource != null) audioSource.PlayOneShot(jumpSound);
+
         if (isGrounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
@@ -99,6 +106,8 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator Dash()
     {
+        if (audioSource != null) audioSource.PlayOneShot(dashSound);
+
         isDashing = true;
         isInvincible = true;
 

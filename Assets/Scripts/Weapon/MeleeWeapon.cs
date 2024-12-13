@@ -10,7 +10,7 @@ public class MeleeWeapon : WeaponBase
     private SpriteRenderer sr;
     private PolygonCollider2D hitbox;
 
-    void Start()
+    protected override void Start()
     {
         isAttacking = false;
         progress = 0f;
@@ -19,6 +19,7 @@ public class MeleeWeapon : WeaponBase
         hitbox = GetComponent<PolygonCollider2D>();
         sr.enabled = false;
         hitbox.enabled = false;
+        base.Start();
     }
 
     protected override void Update()
@@ -38,6 +39,8 @@ public class MeleeWeapon : WeaponBase
     protected override void Fire()
     {
         if (isAttacking) return;
+
+        if (audioSource != null) audioSource.Play();
 
         isAttacking = true;
         progress = 0f;

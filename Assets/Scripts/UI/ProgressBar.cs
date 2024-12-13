@@ -53,7 +53,7 @@ public class ProgressBar : MonoBehaviour
                 progressBar.value = 1;
                 UpdateHuntTask(curQuest, cur);
             }
-            if (Mathf.Abs(spawned.transform.position.x) >= 80) {
+            else if (Mathf.Abs(spawned.transform.position.x) >= 80) {
                 Destroy(spawned);
                 questManager.Fail();
             }

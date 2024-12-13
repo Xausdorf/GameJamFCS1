@@ -1616,9 +1616,17 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3689993352133066658, guid: 8a26ce20ff1adec40a304e0d930917c4, type: 3}
+      propertyPath: tenseCooldown
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 6446093915382283420, guid: 8a26ce20ff1adec40a304e0d930917c4, type: 3}
       propertyPath: Player
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6446093915382283420, guid: 8a26ce20ff1adec40a304e0d930917c4, type: 3}
+      propertyPath: tenseCooldown
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

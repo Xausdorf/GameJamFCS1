@@ -35,7 +35,7 @@ public class EnemySpawner : MonoBehaviour
     private void Update()
     {
         timeUntilTenseInc += Time.deltaTime;
-        float newPositionY = Random.Range(Mathf.Max(Player.transform.position.y - 7f, 0.5f), Player.transform.position.y + 7f);
+        float newPositionY = Random.Range(Mathf.Max(Player.transform.position.y - 7f, 4f), Player.transform.position.y + 7f);
         if (isLeft)
         {
             Spawner.transform.position = new Vector2(Player.transform.position.x - 30, newPositionY);
@@ -83,6 +83,6 @@ public class EnemySpawner : MonoBehaviour
     }
     private void timeUntilSpawnSet()
     {
-        timeUntilSpawn = 10 / tense;
+        timeUntilSpawn = 20 / tense;
     }
 }

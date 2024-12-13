@@ -27,11 +27,14 @@ public class ProgressBar : MonoBehaviour
     // Эта переменная будет вызываться для обновления прогресса
 
     public void Update() {
+        int curQuest = questManager.CurLevel;
+        int cur = questManager.Levels[curQuest].curTask;
+        if ((curQuest == 0 && cur == 3) || (curQuest == 1 && cur == 5) ||( curQuest == 2 && cur == 7)) {
+            questManager.CheckQuestObjectiveCompletion(questManager.Levels[curQuest]);
+        }
         if (playerLifeCountController.curLifeCount <= 0){
             questManager.Fail();
         }
-        int curQuest = questManager.CurLevel;
-        int cur = questManager.Levels[curQuest].curTask;
         if (fst == true) {
             taskUpdater.UpdateTaskObjectiveUI(fst);
             fst = false;

@@ -43,9 +43,9 @@ public class QuestManager : MonoBehaviour
         LoadNextScene();
     }
 
-    void Update() {
-        CheckQuestObjectiveCompletion(Levels[CurLevel]);
-    }
+    // void Update() {
+    //     CheckQuestObjectiveCompletion(Levels[CurLevel]);
+    // }
 
     void Awake()
     {
@@ -55,30 +55,16 @@ public class QuestManager : MonoBehaviour
 
     private void LoadNextScene()
     {
+        if (CurLevel == 3) {
+            SceneManager.LoadScene("WinScene");
+        }
         // Загрузка следующей сцены
         SceneManager.LoadScene(sceneToLoadAfterQuestComplete);
     }
 
-    private void CheckQuestObjectiveCompletion(Quest quest)
+    public void CheckQuestObjectiveCompletion(Quest quest)
     {
-        bool allObjectivesCompleted = quest.status == QuestStatus.Completed ? true : false;
-
-        foreach (var objective in quest.objectives)
-        {
-            if (objective.Type == 1 && !objective.questGiftsObjective.isCompleted) {
-                 allObjectivesCompleted = false;
-            }
-            if (objective.Type == 2 && !objective.questChristmasTreeObjective.isCompleted) {
-                 allObjectivesCompleted = false;
-            }
-            if (objective.Type == 3 && !objective.questSurvivingObjective.isCompleted) {
-                 allObjectivesCompleted = false;
-            }
-            if (objective.Type == 4 && !objective.questHuntObjective.isCompleted) {
-                 allObjectivesCompleted = false;
-            }
-        }
-
+        bool allObjectivesCompleted = true;
         if (allObjectivesCompleted)
         {
             quest.status = QuestStatus.Completed;
@@ -87,10 +73,6 @@ public class QuestManager : MonoBehaviour
             sceneToLoadAfterQuestComplete = $"TestScene{CurLevel + 1}";
             LoadNextScene();
             Debug.Log("Quest Completed: " + quest.questTitle);
-        } else {
-            quest.status = QuestStatus.InProgress;
-            // Действия при провале квеста
-            // Debug.Log("Quest Failed: " + quest.questTitle);
         }
     }
 }

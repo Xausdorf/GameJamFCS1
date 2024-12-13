@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/TestScene3.unity
     guid: 2311d6dcac7771844b8e1b712e98e281
   - enabled: 1
+    path: Assets/Scenes/goydaScene.unity
+    guid: 40b9a500ddac0e54890606ae2c7ee657
+  - enabled: 1
     path: Assets/Scenes/CoolScene1.unity
     guid: 3f87b1a1dc554c345bb742636e394786
   - enabled: 1

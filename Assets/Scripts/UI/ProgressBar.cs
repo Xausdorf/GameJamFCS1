@@ -17,12 +17,19 @@ public class ProgressBar : MonoBehaviour
 
     private GameObject spawned;
 
+    public PlayerLifeCountController playerLifeCountController;
+
     public bool fst = true;
     private float currentProgress = 0f;  // Текущий прогресс
+
+    public Health health;
 
     // Эта переменная будет вызываться для обновления прогресса
 
     public void Update() {
+        if (playerLifeCountController.curLifeCount <= 0){
+            questManager.Fail();
+        }
         int curQuest = questManager.CurLevel;
         int cur = questManager.Levels[curQuest].curTask;
         if (fst == true) {
@@ -31,6 +38,9 @@ public class ProgressBar : MonoBehaviour
         }
         if (questManager.Levels[curQuest].objectives[cur].Type == 3) {
             // Debug.Log("kmdskdm");
+            if (health.curHealth <= 0) {
+                questManager.Fail();
+            }
             UpdateSurvivalTask(curQuest, cur);
         } else if (questManager.Levels[curQuest].objectives[cur].Type == 4) {
             // Debug.Log("kmdskdm");
@@ -121,5 +131,7 @@ public class ProgressBar : MonoBehaviour
         progressBar.value = 0f;  // Начинаем с нулевого прогресса
         questManager = FindObjectOfType<QuestManager>();
         taskUpdater = FindObjectOfType<TaskUpdater>();
+        playerLifeCountController = FindObjectOfType<PlayerLifeCountController>();
+        health = questManager.player.GetComponent<Health>();
     }
 }

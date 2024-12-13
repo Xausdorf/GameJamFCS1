@@ -26,7 +26,7 @@ public class QuestManager : MonoBehaviour
                     type = prev + 1 == 5? rnd.Next(1, prev == 1? 2:prev) : rnd.Next(prev + 1, 5);
                 }
                 if (type == 2) {
-                    type = prev + 1== 5? 1 : prev + 1;
+                    type = 3;
                 }
                 if (type == 0) {
                     type = 4;

@@ -70,7 +70,7 @@ public class QuestManager : MonoBehaviour
             quest.status = QuestStatus.Completed;
             // Можете добавить какие-то действия, когда квест завершён
             CurLevel++;
-            sceneToLoadAfterQuestComplete = $"TestScene{CurLevel + 1}";
+            sceneToLoadAfterQuestComplete = $"CoolScene{CurLevel + 1}";
             LoadNextScene();
             Debug.Log("Quest Completed: " + quest.questTitle);
         }

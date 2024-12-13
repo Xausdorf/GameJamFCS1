@@ -8,11 +8,14 @@ using UnityEngine;
 public class QuestManager : MonoBehaviour
 {
     public List<Quest> Levels;
+
+    public GameObject player;
     public int CurLevel = 0;
     public string sceneToLoadAfterQuestComplete = "NextScene";
 
     void Start()
     {
+        player = GameObject.Find("Player");
         Levels = new List<Quest>{new Quest("Уровень 1", 3), new Quest("Уровень 2", 5), new Quest("Уровень 3", 7)};
         System.Random rnd = new();
         foreach(var Level in Levels) {
@@ -20,10 +23,13 @@ public class QuestManager : MonoBehaviour
             for(int i = 0; i < Level.amount; i++) {
                 int type = rnd.Next(1, 5);
                 if (type == prev) {
-                    type = prev + 1 == 5? rnd.Next(0, prev) : rnd.Next(prev + 1, 5);
+                    type = prev + 1 == 5? rnd.Next(1, prev == 1? 2:prev) : rnd.Next(prev + 1, 5);
                 }
                 if (type == 2) {
                     type = prev + 1== 5? 1 : prev + 1;
+                }
+                if (type == 0) {
+                    type = 4;
                 }
                 TaskObjective task = new TaskObjective(type);
                 Level.objectives[i] = task;
@@ -31,10 +37,14 @@ public class QuestManager : MonoBehaviour
         }
     }
 
+    public void Fail() {
+        sceneToLoadAfterQuestComplete = "FailScene";
+        Destroy(player);
+        LoadNextScene();
+    }
+
     void Update() {
-        if (Levels[CurLevel].status == QuestStatus.Completed) {
-            CheckQuestObjectiveCompletion(Levels[CurLevel]);
-        }
+        CheckQuestObjectiveCompletion(Levels[CurLevel]);
     }
 
     void Awake()
@@ -78,9 +88,9 @@ public class QuestManager : MonoBehaviour
             LoadNextScene();
             Debug.Log("Quest Completed: " + quest.questTitle);
         } else {
-            quest.status = QuestStatus.Failed;
+            quest.status = QuestStatus.InProgress;
             // Действия при провале квеста
-            Debug.Log("Quest Failed: " + quest.questTitle);
+            // Debug.Log("Quest Failed: " + quest.questTitle);
         }
     }
 }

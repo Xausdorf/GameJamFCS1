@@ -17,8 +17,8 @@ public class ObserverSpawner : MonoBehaviour
         }
     }
 
-    public void SpawnPresent(Vector3 position)
+    public GameObject Spawn(Vector3 position)
     {
-        Instantiate(observerPrefab, position, Quaternion.identity);
+        return Instantiate(observerPrefab, position, Quaternion.identity);
     }
 }

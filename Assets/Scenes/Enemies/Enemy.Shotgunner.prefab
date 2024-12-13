@@ -413,7 +413,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 4769808830963564019, guid: 6ccbe0e7dd6454049a1e1b98d09ccf21, type: 3}
   firePoint: {fileID: 6205680832062723065}
-  fireRate: 1
+  fireRate: 0.5
   damage: 3
   audioSource: {fileID: 0}
   screenSize: 14.22

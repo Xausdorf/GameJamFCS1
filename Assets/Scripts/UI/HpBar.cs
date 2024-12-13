@@ -13,7 +13,7 @@ public class CharacterHealth : MonoBehaviour
     {
         if (playerHealth == null) playerHealth = GameObject.Find("Player").GetComponent<PlayerHealth>();
         currentHealth = playerHealth.curHealth;
-        healthBar.value = currentHealth / maxHealth * 100;
+        healthBar.value = 20 + currentHealth / maxHealth * 80;
     }
 
     void Update()
@@ -23,7 +23,7 @@ public class CharacterHealth : MonoBehaviour
         currentHealth = playerHealth.curHealth;
         if (healthBar != null)
         {
-            healthBar.value = currentHealth / maxHealth * 100;
+            healthBar.value = 20 + currentHealth / maxHealth * 80;
             
             // Изменение цвета в зависимости от здоровья
             if (fillImage != null)

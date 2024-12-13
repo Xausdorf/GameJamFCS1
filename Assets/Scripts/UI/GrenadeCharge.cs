@@ -14,7 +14,7 @@ public class GrenadeCharge : MonoBehaviour
         if (grenadeThrower == null) grenadeThrower = GameObject.Find("Player").GetComponent<PlayerGrenadeThrower>();
         currentCharge = grenadeThrower.energyBar;
         maxCharge = grenadeThrower.remainEnergy;
-        chargeBar.value = currentCharge / maxCharge * 100;
+        chargeBar.value = 30 + currentCharge / maxCharge * 70;
     }
 
     void Update()
@@ -26,7 +26,7 @@ public class GrenadeCharge : MonoBehaviour
         currentCharge = grenadeThrower.energyBar;
         if (chargeBar != null)
         {
-            chargeBar.value = currentCharge / maxCharge * 100;
+            chargeBar.value = 30 + currentCharge / maxCharge * 70;
 
             // Изменение цвета в зависимости от здоровья
             if (fillImage != null)

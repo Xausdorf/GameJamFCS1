@@ -31,13 +31,13 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void RemoveItem(QuestItem item) => RemoveItem(item, 1);
+    public void RemoveItem(string itemName) => RemoveItem(itemName, 1);
 
-    public void RemoveItem(QuestItem item, int amount)
+    public void RemoveItem(string itemName, int amount)
     {
-        if (items.ContainsKey(item.itemName))
+        if (items.ContainsKey(itemName))
         {
-            items[item.itemName] = Mathf.Max(items[item.itemName] - amount, 0);
+            items[itemName] = Mathf.Max(items[itemName] - amount, 0);
         }
     }
 
